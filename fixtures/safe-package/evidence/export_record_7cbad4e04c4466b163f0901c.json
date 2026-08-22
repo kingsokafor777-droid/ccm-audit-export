@@ -1,0 +1,19 @@
+{
+  "record_id": "export_record_7cbad4e04c4466b163f0901c",
+  "reference": {
+    "asset_id": "asset_identity",
+    "collector_id": "collector_aws_identity",
+    "control_id": "identity_mfa_coverage",
+    "control_version": "1.0.0",
+    "evidence_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "evidence_id": "evidence_identity_mfa",
+    "metadata": {
+      "classification": "internal",
+      "environment": "synthetic"
+    },
+    "observed_at": "2026-08-21T00:00:00Z",
+    "reference_id": "reference_identity_mfa",
+    "resource_identifier": "resource_identity_summary",
+    "source_id": "source_assessor"
+  }
+}

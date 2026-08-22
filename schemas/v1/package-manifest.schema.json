@@ -1,0 +1,216 @@
+{
+  "$defs": {
+    "ExportDisposition": {
+      "enum": [
+        "included",
+        "omitted",
+        "redacted"
+      ],
+      "title": "ExportDisposition",
+      "type": "string"
+    },
+    "ExportRecord": {
+      "additionalProperties": false,
+      "description": "Manifested result for one input reference; omitted records never have a file.",
+      "properties": {
+        "disposition": {
+          "$ref": "#/$defs/ExportDisposition"
+        },
+        "evidence_path": {
+          "anyOf": [
+            {
+              "pattern": "^evidence/[a-z][a-z0-9_]{1,63}\\.json$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Path"
+        },
+        "evidence_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Sha256"
+        },
+        "matching_rule_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_]{1,63}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matching Rule Id"
+        },
+        "record_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "reference_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Reference Id",
+          "type": "string"
+        },
+        "selected_value_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Value Hash"
+        },
+        "source_descriptor_hash": {
+          "title": "Source Descriptor Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "reference_id",
+        "disposition",
+        "source_descriptor_hash"
+      ],
+      "title": "ExportRecord",
+      "type": "object"
+    },
+    "PackageFile": {
+      "additionalProperties": false,
+      "description": "Declared non-manifest package file and its exact-byte SHA-256 digest.",
+      "properties": {
+        "path": {
+          "pattern": "^(?:policy\\.json|evidence/[a-z][a-z0-9_]{1,63}\\.json)$",
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "title": "PackageFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Sealed inventory and integrity root for an extracted audit-preparation package.",
+  "properties": {
+    "files": {
+      "items": {
+        "$ref": "#/$defs/PackageFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "manifest_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Hash"
+    },
+    "manifest_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Id"
+    },
+    "package_created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$",
+      "title": "Package Created At",
+      "type": "string"
+    },
+    "package_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "package_root_hash": {
+      "title": "Package Root Hash",
+      "type": "string"
+    },
+    "policy_hash": {
+      "title": "Policy Hash",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/ExportRecord"
+      },
+      "title": "Records",
+      "type": "array"
+    },
+    "redaction_policy_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Redaction Policy Id",
+      "type": "string"
+    },
+    "redaction_policy_version": {
+      "maxLength": 512,
+      "minLength": 1,
+      "title": "Redaction Policy Version",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "ccm.audit_export/v1",
+      "default": "ccm.audit_export/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_manifest_hash": {
+      "title": "Source Manifest Hash",
+      "type": "string"
+    },
+    "tenant_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "tenant_id",
+    "source_manifest_hash",
+    "package_created_at",
+    "redaction_policy_id",
+    "redaction_policy_version",
+    "policy_hash",
+    "records",
+    "files",
+    "package_root_hash"
+  ],
+  "title": "PackageManifest",
+  "type": "object"
+}

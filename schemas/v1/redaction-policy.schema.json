@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "RedactionAction": {
+      "enum": [
+        "omit_record",
+        "replace_with_digest"
+      ],
+      "title": "RedactionAction",
+      "type": "string"
+    },
+    "RedactionRule": {
+      "additionalProperties": false,
+      "description": "Closed, exact-match declaration for an export-time record transformation.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/RedactionAction"
+        },
+        "match_value": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Match Value",
+          "type": "string"
+        },
+        "metadata_key": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_]{0,63}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata Key"
+        },
+        "rationale": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "rule_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "selector": {
+          "$ref": "#/$defs/RedactionSelector"
+        }
+      },
+      "required": [
+        "rule_id",
+        "selector",
+        "match_value",
+        "action",
+        "rationale"
+      ],
+      "title": "RedactionRule",
+      "type": "object"
+    },
+    "RedactionSelector": {
+      "enum": [
+        "asset_id",
+        "resource_identifier",
+        "subject_identifier",
+        "metadata"
+      ],
+      "title": "RedactionSelector",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Immutable declared redaction policy applied in deterministic rule-ID order.",
+  "properties": {
+    "policy_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "rules": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RedactionRule"
+      },
+      "title": "Rules",
+      "type": "array"
+    },
+    "version": {
+      "maxLength": 512,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_id",
+    "version"
+  ],
+  "title": "RedactionPolicy",
+  "type": "object"
+}

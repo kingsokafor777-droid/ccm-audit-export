@@ -1,0 +1,20 @@
+{
+  "policy_id": "demo_redaction_policy",
+  "rules": [
+    {
+      "action": "omit_record",
+      "match_value": "asset_sensitive",
+      "rationale": "synthetic omitted asset reference",
+      "rule_id": "rule_omit_sensitive_asset",
+      "selector": "asset_id"
+    },
+    {
+      "action": "replace_with_digest",
+      "match_value": "resource_sensitive",
+      "rationale": "synthetic resource identifier redaction",
+      "rule_id": "rule_redact_resource_identifier",
+      "selector": "resource_identifier"
+    }
+  ],
+  "version": "1.0.0"
+}

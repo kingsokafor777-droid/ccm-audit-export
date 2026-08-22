@@ -1,0 +1,26 @@
+{
+  "record_id": "export_record_85a33a6d1e312fe30330b353",
+  "redaction": {
+    "metadata_key": null,
+    "rationale": "synthetic resource identifier redaction",
+    "rule_id": "rule_redact_resource_identifier",
+    "selected_value_hash": "sha256:e68c4957e9de5938384b6fbb4e0303ceb7b1ae52c5eff700243270f090ac8828",
+    "selector": "resource_identifier"
+  },
+  "reference": {
+    "asset_id": "asset_storage",
+    "collector_id": "collector_aws_logging",
+    "control_id": "storage_logging",
+    "control_version": "1.0.0",
+    "evidence_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "evidence_id": "evidence_storage_logging",
+    "metadata": {
+      "environment": "synthetic"
+    },
+    "observed_at": "2026-08-21T00:00:00Z",
+    "reference_id": "reference_storage_logging",
+    "resource_identifier": "sha256:e68c4957e9de5938384b6fbb4e0303ceb7b1ae52c5eff700243270f090ac8828",
+    "source_id": "source_assessor",
+    "subject_identifier": "subject_operator_a"
+  }
+}

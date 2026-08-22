@@ -1,0 +1,55 @@
+{
+  "files": [
+    {
+      "path": "evidence/export_record_7cbad4e04c4466b163f0901c.json",
+      "sha256": "sha256:d0ff9a10f4c2d58961a0dcdbee3409178dd8bc513ad8d292d1370a7954775e86"
+    },
+    {
+      "path": "evidence/export_record_85a33a6d1e312fe30330b353.json",
+      "sha256": "sha256:75daf63cf281861433abd10d01d840e560037558fe5e84091e472f90d7066873"
+    },
+    {
+      "path": "policy.json",
+      "sha256": "sha256:bae1882721b6a16b0347124f0c74aa0058a54bc1371233fab5b2c9946c11bd94"
+    }
+  ],
+  "manifest_hash": "sha256:a8b32580846a2696c7c240028f9a9693da3a790dfa2cd9f2c7175e95921fa8e5",
+  "manifest_id": "export_manifest_a0e972520e9987528292903f",
+  "package_created_at": "2026-08-24T00:00:00Z",
+  "package_id": "audit_package_identity_review",
+  "package_root_hash": "sha256:b6938477cfa2c37239476c0f21a3113c0d688aba75699c8b1ec067414b9a462a",
+  "policy_hash": "sha256:fc9ab64925bc1bc4f32f40010d03f4401d4eb60a08e77ac13caa3839ed83ac20",
+  "records": [
+    {
+      "disposition": "omitted",
+      "matching_rule_id": "rule_omit_sensitive_asset",
+      "record_id": "export_record_7c39ed3d8332726959f1abf0",
+      "reference_id": "reference_sensitive_asset",
+      "selected_value_hash": "sha256:491c580dd52c9105dca5a50579f2a29217bd631597c9d158a238426f54fc6484",
+      "source_descriptor_hash": "sha256:909a1fb8aac3d6434964cf3896c830bddb0437acdcb97779515b891a848413e9"
+    },
+    {
+      "disposition": "included",
+      "evidence_path": "evidence/export_record_7cbad4e04c4466b163f0901c.json",
+      "evidence_sha256": "sha256:d0ff9a10f4c2d58961a0dcdbee3409178dd8bc513ad8d292d1370a7954775e86",
+      "record_id": "export_record_7cbad4e04c4466b163f0901c",
+      "reference_id": "reference_identity_mfa",
+      "source_descriptor_hash": "sha256:294ae95146824f86321aa942693ce52ff01527d440864759f518bb2491a54cea"
+    },
+    {
+      "disposition": "redacted",
+      "evidence_path": "evidence/export_record_85a33a6d1e312fe30330b353.json",
+      "evidence_sha256": "sha256:75daf63cf281861433abd10d01d840e560037558fe5e84091e472f90d7066873",
+      "matching_rule_id": "rule_redact_resource_identifier",
+      "record_id": "export_record_85a33a6d1e312fe30330b353",
+      "reference_id": "reference_storage_logging",
+      "selected_value_hash": "sha256:e68c4957e9de5938384b6fbb4e0303ceb7b1ae52c5eff700243270f090ac8828",
+      "source_descriptor_hash": "sha256:c4ae32d156b896336c7d78e77c1491bffa9559133a69adba2ec9404cb3a99814"
+    }
+  ],
+  "redaction_policy_id": "demo_redaction_policy",
+  "redaction_policy_version": "1.0.0",
+  "schema_version": "ccm.audit_export/v1",
+  "source_manifest_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "tenant_id": "demo_tenant"
+}

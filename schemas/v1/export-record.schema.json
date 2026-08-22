@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "ExportDisposition": {
+      "enum": [
+        "included",
+        "omitted",
+        "redacted"
+      ],
+      "title": "ExportDisposition",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Manifested result for one input reference; omitted records never have a file.",
+  "properties": {
+    "disposition": {
+      "$ref": "#/$defs/ExportDisposition"
+    },
+    "evidence_path": {
+      "anyOf": [
+        {
+          "pattern": "^evidence/[a-z][a-z0-9_]{1,63}\\.json$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Path"
+    },
+    "evidence_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Sha256"
+    },
+    "matching_rule_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matching Rule Id"
+    },
+    "record_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Record Id",
+      "type": "string"
+    },
+    "reference_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Reference Id",
+      "type": "string"
+    },
+    "selected_value_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Value Hash"
+    },
+    "source_descriptor_hash": {
+      "title": "Source Descriptor Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "reference_id",
+    "disposition",
+    "source_descriptor_hash"
+  ],
+  "title": "ExportRecord",
+  "type": "object"
+}

@@ -1,0 +1,62 @@
+{
+  "additionalProperties": false,
+  "description": "Structured result for an offline extracted-package verification attempt.",
+  "properties": {
+    "errors": {
+      "default": [],
+      "items": {
+        "maxLength": 512,
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "manifest_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Hash"
+    },
+    "package_id": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Id"
+    },
+    "package_root_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Root Hash"
+    },
+    "valid": {
+      "title": "Valid",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "valid"
+  ],
+  "title": "VerificationResult",
+  "type": "object"
+}

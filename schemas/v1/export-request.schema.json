@@ -1,0 +1,266 @@
+{
+  "$defs": {
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "description": "Payload-blind technical evidence reference suitable for controlled handoff.",
+      "properties": {
+        "asset_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "collector_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Collector Id",
+          "type": "string"
+        },
+        "control_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Control Id",
+          "type": "string"
+        },
+        "control_version": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Control Version",
+          "type": "string"
+        },
+        "evidence_hash": {
+          "title": "Evidence Hash",
+          "type": "string"
+        },
+        "evidence_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "observed_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "reference_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Reference Id",
+          "type": "string"
+        },
+        "resource_identifier": {
+          "anyOf": [
+            {
+              "maxLength": 512,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Identifier"
+        },
+        "source_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "subject_identifier": {
+          "anyOf": [
+            {
+              "maxLength": 512,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject Identifier"
+        }
+      },
+      "required": [
+        "reference_id",
+        "evidence_id",
+        "evidence_hash",
+        "source_id",
+        "collector_id",
+        "control_id",
+        "control_version",
+        "observed_at",
+        "asset_id"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "RedactionAction": {
+      "enum": [
+        "omit_record",
+        "replace_with_digest"
+      ],
+      "title": "RedactionAction",
+      "type": "string"
+    },
+    "RedactionPolicy": {
+      "additionalProperties": false,
+      "description": "Immutable declared redaction policy applied in deterministic rule-ID order.",
+      "properties": {
+        "policy_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "rules": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/RedactionRule"
+          },
+          "title": "Rules",
+          "type": "array"
+        },
+        "version": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_id",
+        "version"
+      ],
+      "title": "RedactionPolicy",
+      "type": "object"
+    },
+    "RedactionRule": {
+      "additionalProperties": false,
+      "description": "Closed, exact-match declaration for an export-time record transformation.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/RedactionAction"
+        },
+        "match_value": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Match Value",
+          "type": "string"
+        },
+        "metadata_key": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z][a-z0-9_]{0,63}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata Key"
+        },
+        "rationale": {
+          "maxLength": 512,
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "rule_id": {
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "selector": {
+          "$ref": "#/$defs/RedactionSelector"
+        }
+      },
+      "required": [
+        "rule_id",
+        "selector",
+        "match_value",
+        "action",
+        "rationale"
+      ],
+      "title": "RedactionRule",
+      "type": "object"
+    },
+    "RedactionSelector": {
+      "enum": [
+        "asset_id",
+        "resource_identifier",
+        "subject_identifier",
+        "metadata"
+      ],
+      "title": "RedactionSelector",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "All caller-supplied inputs for one reproducible local evidence-package export.",
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Description"
+    },
+    "evidence_references": {
+      "items": {
+        "$ref": "#/$defs/EvidenceReference"
+      },
+      "title": "Evidence References",
+      "type": "array"
+    },
+    "package_created_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$",
+      "title": "Package Created At",
+      "type": "string"
+    },
+    "package_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "redaction_policy": {
+      "$ref": "#/$defs/RedactionPolicy"
+    },
+    "schema_version": {
+      "const": "ccm.audit_export/v1",
+      "default": "ccm.audit_export/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_manifest_hash": {
+      "title": "Source Manifest Hash",
+      "type": "string"
+    },
+    "tenant_id": {
+      "pattern": "^[a-z][a-z0-9_]{1,63}$",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "tenant_id",
+    "source_manifest_hash",
+    "package_created_at",
+    "redaction_policy",
+    "evidence_references"
+  ],
+  "title": "ExportRequest",
+  "type": "object"
+}
